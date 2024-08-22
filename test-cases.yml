@@ -4,8 +4,9 @@
     Не зарегистрированный пользователь может запустить пробную игру
   prerequisites: |
     Пользователь не должен быть зарегистрирован
-  test-data: |
     https://codebattle.hexlet.io/
+  test-data: |
+    Empty
   steps: 
     - Перейти на главную страницу сайта
     - Нажать на кнопку "Запустить пробную игру"
@@ -18,6 +19,7 @@
     Пользователь может зарегистрироваться по электронной почте
   prerequisites: |
     Пользователь не должен иметь аккаунта
+    https://codebattle.hexlet.io/
   test-data: |
     - Nickname = test_player
     - Email = newuser@test.ru
@@ -31,6 +33,60 @@
     - Нажать "Submit"
   expected-result: |
     Пользователь перенаправлен на страницу лобби (https://codebattle.hexlet.io/#lobby)
+
+- summary: |
+    Проверка невозможности регистрации по одной электронной почте дважды
+  requirement: |
+    Пользователь может зарегистрироваться по одной электронной почте только раз
+  prerequisites: |
+    https://codebattle.hexlet.io/
+  test-data: |
+    - Nickname = test_player_1
+    - Email = newuser@test.ru
+    - Password = password123
+  steps: 
+    - Нажать на кнопку "Sing up"
+    - Ввести Nickname
+    - Ввести Email
+    - Ввести Password
+    - Ввести Password в Password Confirmation
+    - Нажать "Submit"
+  expected-result: |
+    Появится предупреждение "Email is already taken"
+
+- summary: |
+    Проверка невозможности регистрации по существующему Nickname дважды
+  requirement: |
+    Пользователь может зарегистрировать только уникальный Nickname
+  prerequisites: |
+    https://codebattle.hexlet.io/
+  test-data: |
+    - Nickname = test_player
+    - Email = newuser@test1.ru
+    - Password = password123
+  steps: 
+    - Нажать на кнопку "Sing up"
+    - Ввести Nickname
+    - Ввести Email
+    - Ввести Password
+    - Ввести Password в Password Confirmation
+    - Нажать "Submit"
+  expected-result: |
+    Появится предупреждение "Nickname is already taken"
+
+- summary: |
+    Проверка поля Password при регистрации
+  requirement: |
+    Пользователь должен ввести пароль длинною от 6 до 16 символов
+  prerequisites: |
+    https://codebattle.hexlet.io/
+  test-data: |
+    - Password = 1111
+  steps: 
+    - Нажать на кнопку "Sing up"
+    - Ввести Password
+  expected-result: |
+    Появится предупреждение "Should be from 6 to 16 characters"
 
 - summary: |
     Проверка успешной авторизации через электронную почту
@@ -55,6 +111,7 @@
     Пользователь может авторизоваться через GitHub
   prerequisites: |
     Пользователь имеет аккаунт на GitHub
+    https://codebattle.hexlet.io/session/new?locale=en&next=%2F
   test-data: |
     empty
   steps: 
@@ -71,6 +128,7 @@
     Пользователь может авторизоваться через Discord
   prerequisites: |
     Пользователь имеет аккаунт на Discord
+    https://codebattle.hexlet.io/session/new?locale=en&next=%2F
   test-data: |
     empty
   steps: 
@@ -87,10 +145,10 @@
     Пользователь может ознакомиться с FAQ
   prerequisites: |
     Пользователь должен быть не авторизован
-  test-data: |
     https://codebattle.hexlet.io/
+  test-data: |
+    Empty
   steps: 
-    - Перейти на главную страницу сайта
     - Нажать на Support Tg#codebattle
     - Перейти в телеграмм-канал проекта
   expected-result: |
@@ -102,8 +160,8 @@
     Пользователь может создать игру
   prerequisites: |
     Пользователь должен быть авторизован
-  test-data: |
     https://codebattle.hexlet.io/#lobby
+  test-data: |
     Level: 1 stars
     Game Type: With other user
   steps: 
@@ -119,8 +177,8 @@
     Пользователь может создать игру с другим пользователем из списка друзей
   prerequisites: |
     Пользователь должен быть авторизован
-  test-data: |
     https://codebattle.hexlet.io/#lobby
+  test-data: |
     Level: 1 stars
     Game Type: With other user
     Choose opponent: test_player
@@ -137,8 +195,8 @@
     Пользователь может создать игру с ботом
   prerequisites: |
     Пользователь должен быть авторизован
-  test-data: |
     https://codebattle.hexlet.io/#lobby
+  test-data: |
     Level: 1 stars
     Game Type: With a bot
   steps: 
@@ -154,8 +212,9 @@
     Пользователь может подключиться к созданной игре другого пользователя
   prerequisites: |
     Пользователь должен быть авторизован
-  test-data: |
     https://codebattle.hexlet.io/#lobby
+  test-data: |
+    Empty
   steps: 
     - Нажать на кнопку "Fight" во вкладке "Lobby"
   expected-result: |
@@ -196,14 +255,39 @@
   requirement: |
     Пользователь может посмотреть обучающий гайд по основным функциям в игре
   prerequisites: |
-    Пользователь должен быть авторизован
     Создана игра
   test-data: |
-    кнопка - "Show guide"
+    Кнопка - "Show guide"
   steps:
     - Нажать на кнопку "Show guide"
   expected-result: |
     Сайт запустить обучающий гайд по основным функциям в игре
+
+- summary: |
+    Проверка возможности поменять тему редактора кода
+  requirement: |
+    Пользователь может поменять фон у консоли
+  prerequisites: |
+    Создана игра
+  test-data: |
+    Кнопка - "Light"
+  steps:
+    - Нажать на кнопку "Light"
+  expected-result: |
+    Фон у редактора кода сменился с черного на белый
+
+- summary: |
+    Проверка возможности вывести описание задания игры в центр экрана
+  requirement: |
+    Пользователь может вывести описание задания игры в центр экрана
+  prerequisites: |
+    Создана игра
+  test-data: |
+    Кнопка "Expand"
+  steps:
+    - Нажать на кнопку "Expand"
+  expected-result: |
+    Появится окно "Task Description" с заданием игры
 
 - summary: | 
     Проверка работы редактора кода 
@@ -228,7 +312,7 @@
   prerequisites: |
     Создана игра
   test-data: |
-    Empty 
+    Кнопку "Give Up"
   steps: 
     - Нажать на кнопку "Give Up"
     - Подвердить "Give Up"
@@ -243,6 +327,7 @@
     Создана игра
   test-data: |
     "Hello World" 
+    Кнопку "Reset solution"
   steps: 
     - Написать в редакторе кода "Hello World" 
     - Нажать на кнопку "Reset solution"
@@ -256,7 +341,7 @@
   prerequisites: |
     Создана игра
   test-data: |
-    Empty
+    Кнопка "Run"
   steps: 
     - Нажать на кнопку "Run"
   expected-result: |
@@ -270,7 +355,7 @@
     Пользователь должен быть авторизован
     Создана игра
   test-data: |
-    Empty
+    Кнопка "Back to Home"
   steps: 
     - Нажать на кнопку "Back to Home"
   expected-result: |
@@ -320,8 +405,16 @@
   expected-result: |
     Nickname пользователя будет изменен на новый
 
-
-
-
-
-    
+- summary: |
+    Выход из профиля
+  requirement: |
+    Пользователь может выйти из профиля
+  prerequisites: |
+    Пользователь авторизован
+  test-data: |
+    no data
+  steps:
+    - Нажать на навигационное меню
+    - Нажать на "Sign Out"
+  expected-result: |
+    Выход пользователя из приложения выполнен успешно, преход на страницу https://codebattle.hexlet.io/
