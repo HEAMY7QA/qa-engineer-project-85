@@ -1,0 +1,99 @@
+- summary: | 
+    Проверка возможности запуска пробной игры
+  requirement: |
+    Не зарегистрированный пользователь может запустить пробную игру
+  prerequisites: |
+    Пользователь не должен быть зарегистрирован
+  test-data: |
+    empty
+  steps: 
+    - Перейти на главную страницу сайта
+    - Нажать на кнопку "Запустить пробную игру"
+  expected-result: |
+    Пробная игра успешно запущена, пользователь перенаправлен на страницу игры
+
+- summary: |
+    Проверка успешной регистрации по электронной почте
+  requirement: |
+    Пользователь может зарегистрироваться по электронной почте
+  prerequisites: |
+    Пользователь не должен иметь аккаунта
+  test-data: |
+    - Nickname = test_player
+    - Email = newuser@test.ru
+    - Password = password123
+  steps: 
+    - Нажать на кнопку "Sing up"
+    - Ввести Nickname
+    - Ввести Email
+    - Ввести Password
+    - Ввести Password в Password Confirmation
+    - Нажать "Submit"
+  expected-result: |
+    Пользователь перенаправлен на страницу лобби (https://codebattle.hexlet.io/#lobby)
+
+- summary: |
+    Проверка успешной авторизации через электронную почту
+  requirement: |
+    Пользователь может авторизоваться через электронную почту
+  prerequisites: |
+    Пользователь зарегистрирован
+  test-data: |
+    - Email = newuser@test.ru
+    - Password = password123
+  steps: 
+    - Нажать на кнопку "Sing in"
+    - Ввести Email
+    - Ввести Password
+    - Нажать "Submit"
+  expected-result: |
+    Пользователь перенаправлен на страницу лобби (https://codebattle.hexlet.io/#lobby)
+
+- summary: |
+    Проверка успешной авторизации через GitHub
+  requirement: |
+    Пользователь может авторизоваться через GitHub
+  prerequisites: |
+    Пользователь имеет аккаунт на GitHub
+  test-data: |
+    empty
+  steps: 
+    - Нажать на кнопку "Sing in with Github"
+    - Перейти на страницу авторизации GitHub
+    - Ввести учетные данные GitHub
+    - Нажать "Authorize"
+  expected-result: |
+    Пользователь успешно авторизован на сайте через GitHub
+
+- summary: |
+    Проверка успешной авторизации через Discord
+  requirement: |
+    Пользователь может авторизоваться через Discord
+  prerequisites: |
+    Пользователь имеет аккаунт на Discord
+  test-data: |
+    empty
+  steps: 
+    - Нажать на кнопку "Sing in with Discord"
+    - Перейти на страницу авторизации Discord
+    - Ввести учетные данные Discord
+    - Нажать "Authorize"
+  expected-result: |
+    Пользователь успешно авторизован на сайте через Discord
+
+- summary: |
+    Проверка 
+  requirement: |
+    Пользователь может авторизоваться через GitHub
+  prerequisites: |
+    Пользователь имеет аккаунт на GitHub
+  test-data: |
+    empty
+  steps: 
+    - Нажать на кнопку "Sing in with Github"
+    - Перейти на страницу авторизации GitHub
+    - Ввести учетные данные GitHub
+    - Нажать "Authorize"
+  expected-result: |
+    Пользователь успешно авторизован на сайте через GitHub
+    
