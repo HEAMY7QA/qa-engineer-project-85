@@ -1,6 +1,3 @@
-status: pass
-status: fail
-
 - summary: |
     Проверка возможности запуска пробной игры
   status: pass
