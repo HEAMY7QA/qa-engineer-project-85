@@ -91,7 +91,7 @@
     https://codebattle.hexlet.io/
   steps: 
     - Перейти на главную страницу сайта
-    - Нажать на Support: Tg#codebattle
+    - Нажать на Support Tg#codebattle
     - Перейти в телеграмм-канал проекта
   expected-result: |
     Пользователь успешно перенаправлен на телеграмм-канал проекта с FAQ
@@ -191,6 +191,20 @@
   expected-result: |
     Описания задания игры поменяется с английского на русский и обратно
 
+- summary: |
+    Проверка наличия в игре обучающего гайда
+  requirement: |
+    Пользователь может посмотреть обучающий гайд по основным функциям в игре
+  prerequisites: |
+    Пользователь должен быть авторизован
+    Создана игра
+  test-data: |
+    кнопка - "Show guide"
+  steps:
+    - Нажать на кнопку "Show guide"
+  expected-result: |
+    Сайт запустить обучающий гайд по основным функциям в игре
+
 - summary: | 
     Проверка работы редактора кода 
   requirement: |
@@ -207,22 +221,104 @@
   expected-result: |
     У пользователя в редакторе кода должно быть написано "Hello World" 2 раза
 
-- summary: | ПРОДОЛЖИТЬ ОТСЮДА с требования 21
-    Проверка работы редактора кода 
+- summary: | 
+    Проверка работы функции "сдаться" 
   requirement: |
-    Пользователь может писать, вставлять и удалять данные в редакторе кода
+    Пользователь может сдаться и закончить игру
   prerequisites: |
     Создана игра
   test-data: |
-    "Hello World"
+    Empty 
   steps: 
-    - Выделить все содержимое в редакторе кода
-    - Удалить выделенные данные
-    - Скопировать данные теста и вставить в редактор
-    - Перейти на новую строку и написать тестовые данные 
+    - Нажать на кнопку "Give Up"
+    - Подвердить "Give Up"
   expected-result: |
-    У пользователя в редакторе кода должно быть написано "Hello World" 2 раза
+    У пользователя появляется окно "If you read this you've lost the game"
 
+- summary: | 
+    Проверка работы функции "Reset solution" 
+  requirement: |
+    Пользователь может сбросить все изменения, которые внес в редакторе кода
+  prerequisites: |
+    Создана игра
+  test-data: |
+    "Hello World" 
+  steps: 
+    - Написать в редакторе кода "Hello World" 
+    - Нажать на кнопку "Reset solution"
+  expected-result: |
+    Рабочее поле редактора кода сбрасывается до первоначального вида
+
+- summary: | 
+    Проверка работы функции "Run" 
+  requirement: |
+    Пользователь может запустить написанный код
+  prerequisites: |
+    Создана игра
+  test-data: |
+    Empty
+  steps: 
+    - Нажать на кнопку "Run"
+  expected-result: |
+    Во вкладке OUTPUT появится сообщение о выполнении кода
+
+- summary: | 
+    Проверка работы функции "Back to Home" 
+  requirement: |
+    Пользователь может вернуться на первоначальную страницу (lobby)
+  prerequisites: |
+    Пользователь должен быть авторизован
+    Создана игра
+  test-data: |
+    Empty
+  steps: 
+    - Нажать на кнопку "Back to Home"
+  expected-result: |
+    Пользователь перейдет на страницу https://codebattle.hexlet.io/#lobby
+
+- summary: | 
+    Проверка поиска другого пользователя по имени
+  requirement: |
+    Пользователь может найти другого пользователя по имени
+  prerequisites: |
+    Пользователь должен быть авторизован
+    https://codebattle.hexlet.io/users
+  test-data: |
+    test_player
+  steps: 
+    - В text-box "Username" ввести test_player
+  expected-result: |
+    Пользователь найдет другого пользователя с Username "test_player"
+
+- summary: | 
+    Проверка истории игр пользователя
+  requirement: |
+    Пользователь может просмотреть историю своих игр
+  prerequisites: |
+    Пользователь должен быть авторизован
+    https://codebattle.hexlet.io/#lobby
+  test-data: |
+    Empty
+  steps: 
+    - Перейти на страницу "My Profil"
+    - Нажать на вкладку "COMPLETED GAMES"
+  expected-result: |
+    Пользователю будет предоставлен список его игр
+
+- summary: | 
+    Проверка возможности изменения пользователем Nickname
+  requirement: |
+    Пользователь может изменить свой Nickname
+  prerequisites: |
+    Пользователь должен быть авторизован
+    https://codebattle.hexlet.io/#lobby
+  test-data: |
+    test_player_1
+  steps: 
+    - Перейти на страницу "Settings"
+    - В поле "Your name" ввести "test_player_1"
+  expected-result: |
+    Nickname пользователя будет изменен на новый
 
 
 
