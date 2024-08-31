@@ -9,7 +9,7 @@
     Empty
   steps: 
     - Перейти на главную страницу сайта
-    - Нажать на кнопку "Запустить пробную игру"
+    - Нажать на кнопку "TRY SIMPLE BATTLE"            \\ Исправил
   expected-result: |
     Пробная игра успешно запущена, пользователь перенаправлен на страницу игры
 
@@ -201,7 +201,7 @@
     Game Type: With a bot
   steps: 
     - Нажать на кнопку "Create a game"
-    - Выбрать параметры игры с с другом
+    - Выбрать параметры игры с другом
     - Нажать на кнопку "Create battle"
   expected-result: |
     Пользователь успешно создает игру с ботом и перенапряется на страницу игры
@@ -306,7 +306,56 @@
     У пользователя в редакторе кода должно быть написано "Hello World" 2 раза
 
 - summary: | 
-    Проверка работы функции "сдаться" 
+    Проверка возможности выиграть в баттле    \\ Добавил тест-кейс на победу
+  requirement: |
+    У пользователя есть возможность выгирать
+  prerequisites: |
+    Пользователь авторизован
+    https://codebattle.hexlet.io/#lobby
+  test-data: |
+    def solution(n: int) -> int:
+    first_digit = n // 10
+    second_digit = n % 10
+    return first_digit + second_digit
+  steps: 
+    - Нажать на кнопку "CREATE A GAME"
+    - Нажать на кнопку "With a bot"
+    - В разделе "Choose task by name or tags" выбираем задачу "add_two_number"
+    - Нажать на кнопку "Create battle"
+    - Выбрать язык программирования "python"
+    - Ввести данные
+    - Нажать на кнопку "Run"
+  expected-result: |
+    У пользователя появляется окно "Woohoo, you're Champion!!!!!"
+
+- summary: | 
+    Проверка возможности проиграть в баттле   \\ Добавил тест-кейс на поражение
+  requirement: |
+    Пользователь может проиграть игру
+  prerequisites: |
+    Создана игра c ботом с продолжительностью 30 мин
+  test-data: |
+    empty
+  steps: 
+    - Ждать решение от бота
+  expected-result: |
+    У пользователя появляется окно "If you read this you've lost the game"
+
+- summary: | 
+    Проверка возможности сыграть в ничью в баттле   \\ Добавил тест-кейс на ничью
+  requirement: |
+    Пользователь может сдаться и закончить игру
+  prerequisites: |
+    Создана игра c ботом с продолжительностью 3 мин
+  test-data: |
+    empty
+  steps: 
+    - Ждать 3 минуты
+  expected-result: |
+    У пользователя сообщение "Time is up. There are no winners in the game"
+
+- summary: | 
+    Проверка работы функции "Give Up" 
   requirement: |
     Пользователь может сдаться и закончить игру
   prerequisites: |
@@ -335,9 +384,23 @@
     Рабочее поле редактора кода сбрасывается до первоначального вида
 
 - summary: | 
-    Проверка работы функции "Run" 
+    Проверка работы функции "Run". Test passed  \\ Разбил "Проверка работы функции "Run"" на две. 
   requirement: |
-    Пользователь может запустить написанный код
+    Пользователь может проверить правильность решения
+  prerequisites: |
+    Создана игра
+  test-data: |
+    Кнопка "Run"
+  steps: 
+    - Решить задачу
+    - Нажать на кнопку "Run"
+  expected-result: |
+    Во вкладке OUTPUT появится сообщение "Yay! All tests passed!!111"
+
+- summary: | 
+    Проверка работы функции "Run". Tests failed \\ Разбил "Проверка работы функции "Run"" на две. 
+  requirement: |
+    Пользователь может проверить правильность решения
   prerequisites: |
     Создана игра
   test-data: |
@@ -345,7 +408,7 @@
   steps: 
     - Нажать на кнопку "Run"
   expected-result: |
-    Во вкладке OUTPUT появится сообщение о выполнении кода
+    Во вкладке OUTPUT появится сообщение "Tests failed"
 
 - summary: | 
     Проверка работы функции "Back to Home" 
@@ -418,3 +481,20 @@
     - Нажать на "Sign Out"
   expected-result: |
     Выход пользователя из приложения выполнен успешно, преход на страницу https://codebattle.hexlet.io/
+
+- summary: |
+    Проверка создания турнира   \\ NEW
+  requirement: |
+    Пользователь должен иметь возможность создавать турнир
+  prerequisites: |
+    Пользователь авторизован
+    https://codebattle.hexlet.io/tournaments
+  test-data: |
+    Name: Test tournament   
+  steps:
+    - В поле Name вводим данные
+    - Нажимаем кнопку "Create"    
+  expected-result: |
+    Турнир создан
+
+
